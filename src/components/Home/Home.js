@@ -15,7 +15,7 @@ const Home = () => {
   const [updateInfo, setUpdateInfo] = useState('')
 
   // const [storeBook, { data, loading, error }] = useMutation(STORE_BOOK_MUTATION)
-  const { data } = useQuery(GET_ITEM_LIST)
+  const { data, refetch } = useQuery(GET_ITEM_LIST)
   const [createUser, { error }] = useMutation(ADD_ITEM)
 
   // useEffect(() => {
@@ -45,9 +45,8 @@ const Home = () => {
           author: author,
           price: parseInt(price),
         },
-        refetchQueries: [{ query: GET_ITEM_LIST }],
       })
-      .then((response) => setFetched(response.data))
+      .then((response) => refetch())
       .then((err) => console.log(err))
   }
   const editHandler = (id, modal) => {

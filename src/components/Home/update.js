@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import client from '../../GraphQlClient//GraphQlClient'
 import { UPDATE_ITEM } from '../../GraphQlClient/graphql/Mutation'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
+import { GET_ITEM_LIST } from '../../GraphQlClient/graphql/Queries'
 
 const Update = ({ updateInfo, modal }) => {
   const [changeName, setChangeName] = useState('')
   const [changeAuthor, setChangeAuthor] = useState('')
   const [changePrice, setChangePrice] = useState('')
   const [updateUser, { data, loading, error }] = useMutation(UPDATE_ITEM)
+  const { refetch } = useQuery(GET_ITEM_LIST)
   const formSubmitHandler = (e) => {
     e.preventDefault()
     const ifChange = [
@@ -30,8 +32,11 @@ const Update = ({ updateInfo, modal }) => {
       updateUser({
         variables: merged,
       })
+        .then((response) => refetch())
+        .then((err) => console.log(err))
     }
   }
+
   return (
     <div>
       {' '}

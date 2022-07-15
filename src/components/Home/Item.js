@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import client from '../../GraphQlClient/GraphQlClient'
 import { DELETE_ITEM } from '../../GraphQlClient/graphql/Mutation'
+import { GET_ITEM_LIST } from '../../GraphQlClient/graphql/Queries'
 const Item = ({ item, editHandler }) => {
   const [deleteUser, { error }] = useMutation(DELETE_ITEM)
+  const { refetch } = useQuery(GET_ITEM_LIST)
   const deleteHandler = (dId) => {
-    client.mutate({
-      mutation: DELETE_ITEM,
-      variables: {
-        id: dId,
-      },
-    })
-    // .then((response) => console.log(response.data))
-    // .then((err) => console.log(err))
+    client
+      .mutate({
+        mutation: DELETE_ITEM,
+        variables: {
+          id: dId,
+        },
+      })
+      .then((response) => refetch())
+      .then((err) => console.log(err))
   }
   return (
     <>
