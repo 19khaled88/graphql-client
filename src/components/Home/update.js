@@ -30,18 +30,6 @@ const Update = ({ updateInfo, modal }) => {
       updateUser({
         variables: merged,
       })
-      // client
-      //   .mutate({
-      //     mutation: UPDATE_ITEM,
-      //     variables: {
-      //       _id: '62c95808a921126f4d3c0b04',
-      //       name: 'English',
-      //       author: 'khaled',
-      //       price: 400,
-      //     },
-      //   })
-      //   .then((response) => console.log(response.data))
-      //   .then((err) => console.log(err))
     }
   }
   return (

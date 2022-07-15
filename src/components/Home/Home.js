@@ -45,6 +45,7 @@ const Home = () => {
           author: author,
           price: parseInt(price),
         },
+        refetchQueries: [{ query: GET_ITEM_LIST }],
       })
       .then((response) => setFetched(response.data))
       .then((err) => console.log(err))

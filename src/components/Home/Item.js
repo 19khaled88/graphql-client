@@ -5,16 +5,14 @@ import { DELETE_ITEM } from '../../GraphQlClient/graphql/Mutation'
 const Item = ({ item, editHandler }) => {
   const [deleteUser, { error }] = useMutation(DELETE_ITEM)
   const deleteHandler = (dId) => {
-    console.log(dId)
-    client
-      .mutate({
-        mutation: DELETE_ITEM,
-        variables: {
-          id: dId,
-        },
-      })
-      .then((response) => console.log(response.data))
-      .then((err) => console.log(err))
+    client.mutate({
+      mutation: DELETE_ITEM,
+      variables: {
+        id: dId,
+      },
+    })
+    // .then((response) => console.log(response.data))
+    // .then((err) => console.log(err))
   }
   return (
     <>
